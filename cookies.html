@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookies</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-40 -40 80 80'%3E%3Ccircle r='34' fill='%23D9A15B'/%3E%3Ccircle cx='-14' cy='-10' r='5' fill='%234a2a17'/%3E%3Ccircle cx='8' cy='4' r='5.5' fill='%234a2a17'/%3E%3Ccircle cx='-6' cy='16' r='4.5' fill='%234a2a17'/%3E%3Ccircle cx='20' cy='-2' r='3' fill='%23E86A8C'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#121212; --card:#F5F1EA; --ink:#2b1d1a; --muted:#7a6f66; --pink:#E86A8C; --pinkd:#b9466a; --line:#e6ddd0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; background:var(--bg); color:var(--card); font-family:"DM Mono", monospace; display:flex; align-items:center; justify-content:center; padding:24px 16px; overflow-x:hidden; }
+  .card { position:relative; width:min(100%, 520px); background:var(--card); color:var(--ink); border-radius:20px; padding:28px 26px 24px; box-shadow:0 20px 50px rgba(0,0,0,.55); transform:rotate(-1deg); }
+  .cookie { position:absolute; top:-46px; right:24px; width:92px; height:92px; transform:rotate(-12deg); filter:drop-shadow(0 8px 10px rgba(0,0,0,.4)); transition:transform .4s; }
+  .cookie.nom { animation:nom .5s; }
+  @keyframes nom { 50% { transform:rotate(-12deg) scale(1.15); } }
+  h1 { font-family:"Instrument Serif", serif; font-weight:400; font-size:42px; line-height:1; margin:0 0 10px; letter-spacing:-.5px; }
+  h1 i { color:var(--pink); }
+  p.lead { font-size:13px; line-height:1.6; color:var(--muted); margin:0 0 18px; }
+  .row { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-top:1px dashed var(--line); }
+  .row .txt { flex:1; }
+  .row b { display:block; font-weight:500; font-size:12px; letter-spacing:2px; margin-bottom:4px; }
+  .row span { font-size:13px; line-height:1.5; color:var(--muted); }
+  .sw { position:relative; width:44px; height:26px; flex:none; margin-top:2px; }
+  .sw input { opacity:0; width:0; height:0; }
+  .sw i { position:absolute; inset:0; background:#d8cfc2; border-radius:999px; transition:.25s; cursor:pointer; }
+  .sw i::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:.25s; }
+  .sw input:checked + i { background:var(--pink); }
+  .sw input:checked + i::after { transform:translateX(18px); }
+  .sw input:disabled + i { opacity:.6; cursor:not-allowed; }
+  .btns { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  button { font:500 13px "DM Mono", monospace; letter-spacing:1.5px; border:0; border-radius:999px; padding:12px 20px; cursor:pointer; }
+  .acc { background:var(--pink); color:#fff; box-shadow:0 4px 0 var(--pinkd); }
+  .acc:active { transform:translateY(3px); box-shadow:0 1px 0 var(--pinkd); }
+  .rej { background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+  .msg { font-family:"Instrument Serif", serif; font-style:italic; font-size:22px; margin-top:16px; min-height:28px; color:var(--pink); }
+  .back { display:block; text-align:center; margin-top:22px; color:#8f8a83; font-size:12px; letter-spacing:2px; }
+  .back a { color:var(--card); }
+  .crumb { position:fixed; width:10px; height:10px; border-radius:50%; pointer-events:none; z-index:9; }
+  @media (max-width:420px) { h1 { font-size:34px; } .cookie { width:72px; height:72px; top:-36px; } }
+</style>
+</head>
+<body>
+<div>
+  <div class="card">
+    <svg class="cookie" id="cookie" viewBox="-40 -40 80 80" aria-hidden="true">
+      <defs><mask id="bite"><rect x="-40" y="-40" width="80" height="80" fill="#fff"/><circle cx="30" cy="-26" r="12" fill="#000"/><circle cx="38" cy="-10" r="10" fill="#000"/><circle cx="20" cy="-36" r="9" fill="#000"/></mask></defs>
+      <g mask="url(#bite)"><circle r="34" fill="#D9A15B"/><circle r="34" fill="none" stroke="#c48a45" stroke-width="3"/>
+      <circle cx="-14" cy="-10" r="5" fill="#4a2a17"/><circle cx="8" cy="4" r="5.5" fill="#4a2a17"/><circle cx="-6" cy="16" r="4.5" fill="#4a2a17"/><circle cx="16" cy="20" r="4" fill="#4a2a17"/><circle cx="-20" cy="10" r="3.5" fill="#4a2a17"/><circle cx="2" cy="-20" r="4" fill="#4a2a17"/><circle cx="20" cy="-2" r="3" fill="#E86A8C"/><circle cx="-10" cy="-24" r="2.5" fill="#E86A8C"/></g>
+    </svg>
+
+    <h1>This profile uses <i>cookies</i></h1>
+    <p class="lead">Like any good website, I remember a few things. Here's what this cookie knows about me. Choose what you'd like to keep.</p>
+
+    <div class="row"><div class="txt"><b>STRICTLY NECESSARY</b><span>AI and data, built with Python. Always on, sorry.</span></div><label class="sw"><input type="checkbox" checked disabled><i></i></label></div>
+    <div class="row"><div class="txt"><b>FUNCTIONAL</b><span>Apps in Flutter and Firebase, things on AWS, and the occasional Arduino.</span></div><label class="sw"><input type="checkbox" class="opt"><i></i></label></div>
+    <div class="row"><div class="txt"><b>PERFORMANCE</b><span>Currently learning deep learning, one model at a time.</span></div><label class="sw"><input type="checkbox" class="opt"><i></i></label></div>
+    <div class="row"><div class="txt"><b>PREFERENCES</b><span>Playful designs over minimal ones, pink everything, and Troye Sivan on repeat.</span></div><label class="sw"><input type="checkbox" class="opt"><i></i></label></div>
+    <div class="row"><div class="txt"><b>PERSONALISATION</b><span>Mixing live sound and programming stage lights when I'm not coding.</span></div><label class="sw"><input type="checkbox" class="opt"><i></i></label></div>
+
+    <div class="btns">
+      <button class="acc" id="acc">ACCEPT ALL</button>
+      <button class="rej" id="rej">REJECT ALL</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+  <span class="back"><a href="https://github.com/jnreii">← back to github</a></span>
+</div>
+
+<script>
+(() => {
+  let actx = null;
+  function tone(f, d, type, v, slide, delay) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime + (delay || 0), o = actx.createOscillator(), g = actx.createGain();
+      o.type = type || 'triangle'; o.frequency.setValueAtTime(f, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + d);
+      g.gain.setValueAtTime(v || .07, t); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + d + .02);
+    } catch (e) {}
+  }
+  const opts = [...document.querySelectorAll('.opt')], msg = document.getElementById('msg'), cookie = document.getElementById('cookie');
+  opts.forEach(o => o.addEventListener('change', () => tone(o.checked ? 880 : 520, .06, 'triangle', .05)));
+
+  function crumbs(n, colors) {
+    const r = cookie.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement('span'); c.className = 'crumb';
+      c.style.background = colors[i % colors.length]; c.style.left = cx + 'px'; c.style.top = cy + 'px';
+      const s = 4 + Math.random() * 8; c.style.width = c.style.height = s + 'px';
+      document.body.appendChild(c);
+      const a = Math.random() * Math.PI * 2, d = 80 + Math.random() * 180;
+      c.animate([{ transform:'translate(0,0)', opacity:1 }, { transform:`translate(${Math.cos(a) * d}px, ${Math.sin(a) * d + 120}px)`, opacity:0 }],
+        { duration:900 + Math.random() * 500, easing:'cubic-bezier(.2,.7,.4,1)' }).onfinish = () => c.remove();
+    }
+  }
+  document.getElementById('acc').onclick = () => {
+    opts.forEach((o, i) => setTimeout(() => { o.checked = true; tone(700 + i * 120, .07, 'triangle', .05); }, i * 90));
+    cookie.classList.remove('nom'); void cookie.offsetWidth; cookie.classList.add('nom');
+    crumbs(28, ['#D9A15B', '#4a2a17', '#E86A8C', '#F2D16B']);
+    setTimeout(() => [523, 659, 784].forEach((f, i) => tone(f, .12, 'triangle', .07, null, i * .08)), 380);
+    msg.textContent = 'Great taste. Say hi anytime.';
+  };
+  document.getElementById('rej').onclick = () => {
+    opts.forEach(o => o.checked = false);
+    tone(300, .25, 'sawtooth', .06, 120);
+    crumbs(14, ['#D9A15B', '#c48a45']);
+    msg.textContent = 'Too late, we have already met.';
+  };
+})();
+</script>
+</body>
+</html>
