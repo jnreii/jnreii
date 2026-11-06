@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Say hi</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 104 68'%3E%3Crect width='104' height='68' rx='4' fill='%23F6C1D0'/%3E%3Cpath d='M0 0 L52 38 L104 0' fill='none' stroke='%23d99aae' stroke-width='3'/%3E%3Ccircle cx='52' cy='38' r='8' fill='%23E86A8C'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#121212; --card:#F5F1EA; --ink:#2b1d1a; --muted:#7a6f66; --pink:#E86A8C; --pinkd:#b9466a; --env:#F6C1D0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; background:var(--bg); color:var(--card); font-family:"DM Mono", monospace; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 16px; }
+  .env { width:min(100%, 460px); position:relative; transform:rotate(-1.5deg); }
+  .flap { height:90px; background:var(--env); clip-path:polygon(0 0, 100% 0, 50% 100%); filter:brightness(.95); position:relative; z-index:2; }
+  .seal { position:absolute; left:50%; top:66px; width:34px; height:34px; margin-left:-17px; border-radius:50%; background:var(--pink); z-index:3; box-shadow:0 3px 6px rgba(0,0,0,.25); }
+  .card { background:var(--card); color:var(--ink); border-radius:0 0 16px 16px; padding:44px 26px 26px; margin-top:-46px; box-shadow:0 20px 50px rgba(0,0,0,.55); border-top:16px solid var(--env); }
+  h1 { font-family:"Instrument Serif", serif; font-weight:400; font-size:44px; line-height:1; margin:0 0 8px; }
+  h1 i { color:var(--pink); }
+  p { font-size:13px; line-height:1.6; color:var(--muted); margin:0 0 20px; }
+  .addr { display:flex; align-items:center; gap:10px; background:#fff; border:1.5px dashed #d8cfc2; border-radius:12px; padding:12px 14px; margin-bottom:18px; }
+  .addr span { flex:1; font-size:14px; word-break:break-all; }
+  .copy { font:500 12px "DM Mono", monospace; letter-spacing:1.5px; background:var(--ink); color:var(--card); border:0; border-radius:999px; padding:9px 14px; cursor:pointer; }
+  .btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .btns a { text-align:center; text-decoration:none; font:500 12px "DM Mono", monospace; letter-spacing:1.5px; border-radius:999px; padding:12px 10px; }
+  .gmail { background:var(--pink); color:#fff; box-shadow:0 4px 0 var(--pinkd); }
+  .outlook { border:1.5px solid var(--ink); color:var(--ink); }
+  .app { grid-column:1 / -1; color:var(--muted) !important; font-size:11px !important; padding:6px !important; text-decoration:underline !important; }
+  .toast { position:fixed; bottom:28px; left:50%; transform:translate(-50%, 20px); opacity:0; background:var(--card); color:var(--ink); padding:10px 18px; border-radius:999px; font-size:12px; letter-spacing:1.5px; transition:.25s; }
+  .toast.show { opacity:1; transform:translate(-50%, 0); }
+  .back { margin-top:26px; font-size:12px; letter-spacing:2px; color:#8f8a83; }
+  .back a { color:var(--card); }
+</style>
+</head>
+<body>
+  <div class="env">
+    <div class="flap"></div><div class="seal"></div>
+    <div class="card">
+      <h1>Say <i>hi</i></h1>
+      <p>Internships, projects, or just a question about something I built. My inbox is open.</p>
+      <div class="addr"><span id="email">jermaine.lim05@gmail.com</span><button class="copy" id="copy">COPY</button></div>
+      <div class="btns">
+        <a class="gmail" target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&fs=1&to=jermaine.lim05@gmail.com">OPEN GMAIL</a>
+        <a class="outlook" target="_blank" rel="noopener" href="https://outlook.live.com/mail/0/deeplink/compose?to=jermaine.lim05@gmail.com">OPEN OUTLOOK</a>
+        <a class="app" href="mailto:jermaine.lim05@gmail.com">or use my mail app</a>
+      </div>
+    </div>
+  </div>
+  <div class="back"><a href="https://github.com/jnreii">← back to github</a></div>
+  <div class="toast" id="toast">COPIED</div>
+<script>
+  document.getElementById('copy').onclick = async () => {
+    const t = document.getElementById('toast'), e = document.getElementById('email').textContent;
+    try { await navigator.clipboard.writeText(e); }
+    catch (err) { const r = document.createRange(); r.selectNode(document.getElementById('email')); getSelection().removeAllRanges(); getSelection().addRange(r); try { document.execCommand('copy'); } catch (e2) {} }
+    t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1400);
+  };
+</script>
+</body>
+</html>
